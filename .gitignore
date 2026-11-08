@@ -7,3 +7,5 @@ data/*.xlsx
 # Generated derivatives and results should be validated before committing/publishing.
 data/pakistan_groundwater_observations.csv
 results/*.csv
+# Kaggle upload package is built locally
+kaggle/

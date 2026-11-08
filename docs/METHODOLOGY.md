@@ -1,4 +1,4 @@
-# Research methodology and experiment protocol — v0.1.0
+# Research methodology and experiment protocol: v0.1.0
 
 ## Study design
 

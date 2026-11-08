@@ -1,4 +1,4 @@
-.PHONY: install test prepare validate analyse clean
+.PHONY: install test prepare validate analyse report kaggle all clean
 install:
 	python3 -m pip install -r requirements.txt
 test:
@@ -9,5 +9,11 @@ validate:
 	python3 scripts/validate_dataset.py
 analyse:
 	python3 scripts/analyse.py
+report:
+	python3 scripts/report.py
+kaggle:
+	python3 scripts/make_kaggle_package.py
+all: prepare validate analyse report kaggle
 clean:
 	rm -f data/pakistan_groundwater_observations.csv results/site_trends.csv
+	rm -rf kaggle

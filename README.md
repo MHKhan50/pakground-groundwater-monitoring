@@ -1,6 +1,6 @@
 # PakGround: Pakistan Groundwater Monitoring
 
-**Release:** v0.1.0  
+**Release:** v0.2.0  
 **Repository:** `MHKhan50/pakground-groundwater-monitoring`  
 **Research focus:** Reproducible extraction and exploratory trend analysis of historical groundwater-level observations for Punjab, Pakistan.
 
@@ -21,7 +21,11 @@ python3 -m unittest discover -s tests -v
 python3 scripts/prepare_dataset.py --download
 python3 scripts/validate_dataset.py
 python3 scripts/analyse.py --min-observations 4
+python3 scripts/report.py
+python3 scripts/make_kaggle_package.py
 ```
+
+Or in one step: `make all`.
 
 The download step retrieves the original BGS XLSX workbook. If the BGS endpoint is unavailable, download the workbook from the BGS dataset page and save it as `data/India_Pakistan_WL_NGDC.xlsx`, then run `python3 scripts/prepare_dataset.py`.
 
@@ -35,8 +39,15 @@ The importer defaults to the `Full_dataset` sheet. It accepts country values `PA
 
 ## Outputs
 
-- `data/pakistan_groundwater_observations.csv` — Pakistan-filtered observations.
-- `results/site_trends.csv` — per-site observation count, period, endpoint depths, linear slope and plain-language direction.
+- `data/pakistan_groundwater_observations.csv`: Pakistan-filtered observations.
+- `results/site_trends.csv`: per-site observation count, period, endpoint depths, linear slope and plain-language direction.
+- `results/summary.json`: row and site counts, years, coordinate coverage, depth quantiles, trend counts (|slope| < 0.1 m/year counted as about stable), sensitivity to minimum observations (4, 10, 20) and a since-2000 window.
+- `results/fig_observations_per_year.png`, `results/fig_trend_histogram.png`, `results/fig_site_map.png`.
+- `kaggle/1-upload-these/` and `kaggle/2-helpers/`: files for the Kaggle dataset, its field text, cover and starter notebook.
+
+## Results
+
+To be filled in from the first full run on the BGS workbook.
 
 The raw BGS workbook is downloaded locally and is not committed by default. The prepared CSV is generated from the source and should only be published after validating its row count, country values, and source acknowledgement.
 
@@ -108,4 +119,4 @@ See `CITATION.cff`. Cite the BGS dataset and the 2022 Nature Geoscience paper wh
 
 ## Release scope
 
-v0.1.0 provides a reproducible import/filter/validation/site-trend baseline. It does not include a province-wide risk map, predictive ML model, Kaggle upload, or empirical conclusions. Those should be added only after source schema and Pakistan-only extraction have been independently checked.
+v0.1.0 provides a reproducible import/filter/validation/site-trend baseline. v0.2.0 adds the summary, figures and Kaggle package. It does not include a province-wide risk map, a predictive model or causal conclusions. Those should be added only after source schema and Pakistan-only extraction have been independently checked.

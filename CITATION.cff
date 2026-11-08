@@ -4,7 +4,8 @@ title: "PakGround: Pakistan Groundwater Monitoring"
 authors:
   - family-names: Hussain
     given-names: Muzammal
-version: 0.1.0
+    orcid: "https://orcid.org/0009-0001-2570-5686"
+version: 0.2.0
 date-released: 2026-11-08
 license: MIT
 repository-code: "https://github.com/MHKhan50/pakground-groundwater-monitoring"
