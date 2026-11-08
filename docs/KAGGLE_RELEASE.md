@@ -1,15 +1,12 @@
-# Kaggle release checklist
+# Kaggle release steps
 
-This repository contains the reproducible pipeline and dataset documentation. The real Pakistan-only CSV is generated on the researcher's machine from the original BGS workbook; no fabricated observations are supplied in this release.
-
-Before uploading a Kaggle dataset:
-
-1. Run `python3 scripts/prepare_dataset.py --download`.
-2. Run `python3 scripts/validate_dataset.py` and inspect the output CSV independently.
-3. Record the actual row count, unique site count, date range, missing-coordinate rate, and country values. Do not copy the parent workbook's regional counts into Pakistan-only metadata.
-4. Upload `data/pakistan_groundwater_observations.csv`, `docs/DATASET_CARD.md`, and `docs/DATA_DICTIONARY.md`.
-5. Include the original BGS dataset DOI and required NERC acknowledgement: “Contains data supplied by permission of the Natural Environment Research Council [YEAR]”. Confirm the year and terms on the BGS catalogue before publishing.
-6. Clearly label the dataset as a Pakistan-filtered derivative of a mixed Pakistan/India source.
-7. Do not describe the observations as complete, spatially representative, or current beyond the source's 2020 end date.
-
-The Kaggle dataset should not be published until these checks pass. The actual source workbook is not bundled with this software release.
+1. Run `make all` (or the five scripts) and check that `validate_dataset.py` prints PASS.
+2. On Kaggle: Create > New Dataset. Drag in every file from `kaggle/1-upload-these/`.
+3. Title and subtitle: copy from `kaggle/2-helpers/KAGGLE_FIELDS.md`. Set the URL to
+   `pakistan-punjab-groundwater-levels`.
+4. Create, then on the dataset page: add the cover image `kaggle/2-helpers/cover_1280x640.png`, paste the description,
+   choose the licence "Other (specified in description)" and the tags from `KAGGLE_FIELDS.md`.
+5. In the description, replace `[YEAR]` in the NERC acknowledgement with the year shown on the BGS catalogue page
+   for the dataset.
+6. Code > New Notebook on the dataset page, File > Import notebook, choose
+   `kaggle/2-helpers/starter_notebook.ipynb`, run all, then Save Version.

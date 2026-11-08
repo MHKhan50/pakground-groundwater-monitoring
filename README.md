@@ -45,9 +45,33 @@ The importer defaults to the `Full_dataset` sheet. It accepts country values `PA
 - `results/fig_observations_per_year.png`, `results/fig_trend_histogram.png`, `results/fig_site_map.png`.
 - `kaggle/1-upload-these/` and `kaggle/2-helpers/`: files for the Kaggle dataset, its field text, cover and starter notebook.
 
-## Results
+## Results (first full run, 8 November 2026)
 
-To be filled in from the first full run on the BGS workbook.
+From the BGS workbook, 58,699 rows had a usable water level (rows marked `NA` are skipped). Of these, **38,450
+observations from 3,311 Pakistan wells** were kept (all IDs start with `PAK`; every row has coordinates). They span
+1900-2020, but almost all fall between 1979 and 2010 (`results/fig_observations_per_year.png`). The median well has
+11 observations; the median depth is 3.2 m below ground (middle half 2.0-5.0 m).
+
+Per-well linear trends (positive = water level deeper below ground; |slope| < 0.1 m/year counted as about stable):
+
+| Wells included | Wells | Deeper | Shallower | About stable | Median trend (m/year) |
+|---|---|---|---|---|---|
+| 4+ observations | 3,008 | 1,022 (34%) | 419 (14%) | 1,567 (52%) | +0.055 |
+| 10+ observations | 1,750 | 648 (37%) | 48 (3%) | 1,054 (60%) | +0.071 |
+| 20+ observations | 557 | 178 (32%) | 15 (3%) | 364 (65%) | +0.067 |
+| Since 2000, 4+ observations | 2,054 | 575 (28%) | 577 (28%) | 902 (44%) | -0.007 |
+
+- In wells with longer records, about a third have water levels moving deeper and only about 3% moving shallower.
+- Most "shallower" wells in the first row have short records: requiring 10 observations drops them from 419 to 48.
+  Short records are sensitive to when in the year they were measured.
+- Since 2000 (mostly 2000-2010) deeper and shallower wells are equal in number; this window is short.
+- The largest group of deeper trends is in the centre of the map, roughly 30-32 N and 72-74 E (`results/fig_site_map.png`).
+
+These are descriptive per-well trends. They are not a test of the BGS authors' own analysis (MacAllister et al.,
+2022), which uses a different method.
+
+Kaggle dataset: <https://www.kaggle.com/datasets/muzammalhussain11/pakistan-punjab-groundwater-levels>.
+Article: <https://masmatixinnovations.co.uk/insights/pakistan-punjab-groundwater.html>.
 
 The raw BGS workbook is downloaded locally and is not committed by default. The prepared CSV is generated from the source and should only be published after validating its row count, country values, and source acknowledgement.
 
