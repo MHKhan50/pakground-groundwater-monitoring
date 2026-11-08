@@ -1,0 +1,75 @@
+{
+  "observations": 38450,
+  "sites": 3311,
+  "first_year": 1900,
+  "last_year": 2020,
+  "country_values": [
+    "PAK"
+  ],
+  "share_rows_with_coordinates": 1.0,
+  "observations_per_site": {
+    "p25": 5.0,
+    "median": 11.0,
+    "p75": 17.0
+  },
+  "depth_m": {
+    "p25": 2.0117,
+    "median": 3.2156,
+    "p75": 5.0353
+  },
+  "stable_band_m_per_year": 0.1,
+  "trends_by_min_observations": {
+    "4": {
+      "n_sites": 3008,
+      "deeper": 1022,
+      "shallower": 419,
+      "about_stable": 1567,
+      "share_deeper": 0.3398,
+      "slope_m_per_year": {
+        "p25": -0.0279,
+        "median": 0.0549,
+        "p75": 0.1363
+      }
+    },
+    "10": {
+      "n_sites": 1750,
+      "deeper": 648,
+      "shallower": 48,
+      "about_stable": 1054,
+      "share_deeper": 0.3703,
+      "slope_m_per_year": {
+        "p25": 0.0141,
+        "median": 0.0714,
+        "p75": 0.1358
+      }
+    },
+    "20": {
+      "n_sites": 557,
+      "deeper": 178,
+      "shallower": 15,
+      "about_stable": 364,
+      "share_deeper": 0.3196,
+      "slope_m_per_year": {
+        "p25": 0.0195,
+        "median": 0.0666,
+        "p75": 0.1173
+      }
+    }
+  },
+  "recent_window": {
+    "from_year": 2000,
+    "observations": 13755,
+    "trends_min_obs_4": {
+      "n_sites": 2054,
+      "deeper": 575,
+      "shallower": 577,
+      "about_stable": 902,
+      "share_deeper": 0.2799,
+      "slope_m_per_year": {
+        "p25": -0.115,
+        "median": -0.0067,
+        "p75": 0.1239
+      }
+    }
+  }
+}
