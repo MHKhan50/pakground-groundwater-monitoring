@@ -70,7 +70,7 @@ Per-well linear trends (positive = water level deeper below ground; |slope| < 0.
 These are descriptive per-well trends. They are not a test of the BGS authors' own analysis (MacAllister et al.,
 2022), which uses a different method.
 
-Kaggle dataset: <https://www.kaggle.com/datasets/muzammalhussain11/pakistan-punjab-groundwater-levels>.
+Kaggle dataset: <https://www.kaggle.com/datasets/muzammalhussain11/pakistan-punjab-groundwater-levels-1900-2020> (starter notebook: <https://www.kaggle.com/code/muzammalhussain11/pakistan-punjab-groundwater-levels>).
 Article: <https://masmatixinnovations.co.uk/insights/pakistan-punjab-groundwater.html>.
 
 The raw BGS workbook is downloaded locally and is not committed by default. The prepared CSV is generated from the source and should only be published after validating its row count, country values, and source acknowledgement.
