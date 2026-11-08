@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 import tempfile
 import unittest
 from pathlib import Path
@@ -57,6 +58,26 @@ class CsvRoundTripTests(unittest.TestCase):
             rows = load_workbook_rows(path, "Full_dataset")
             self.assertEqual(len(filter_country(rows)), 1)
             self.assertEqual(filter_country(rows)[0]["site_id"], "W1")
+
+
+    def test_bgs_layout_without_country_column(self):
+        from openpyxl import Workbook
+        from pakground.pipeline import country_from_site_id
+        self.assertEqual(country_from_site_id("PAK2041"), "PAK")
+        self.assertEqual(country_from_site_id("IND17"), "IND")
+        self.assertEqual(country_from_site_id("X9"), "")
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bgs.xlsx"
+            wb = Workbook(); ws = wb.active; ws.title = "Full_dataset"
+            ws.append(["OW_ID", "DATE", "LONG", "LAT", "WL_MBGL", "LOCATION"])
+            ws.append(["IND1", datetime(1973, 10, 1), 74.29, 30.07, "NA", "ABOHAR"])
+            ws.append(["IND1", datetime(1974, 10, 1), 74.29, 30.07, 12.5, "ABOHAR"])
+            ws.append(["PAK99", datetime(2001, 6, 1), 73.1, 31.4, 8.25, "LAHORE"])
+            wb.save(path)
+            rows = load_workbook_rows(path, "Full_dataset")
+            self.assertEqual(len(rows), 2)  # the 'NA' depth row is skipped
+            pak = filter_country(rows)
+            self.assertEqual([(r["site_id"], r["depth_m"], r["latitude"]) for r in pak], [("PAK99", 8.25, 31.4)])
 
 
 if __name__ == "__main__":

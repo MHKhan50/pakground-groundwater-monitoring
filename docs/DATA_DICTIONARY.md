@@ -7,7 +7,7 @@
 | `site_id` | string | Source identifier | Observation well/site identifier from BGS workbook. |
 | `date` | string | `YYYY-MM-DD` | Date of measurement; year-only values are normalized to 1 January. |
 | `depth_m` | float | metres below ground level | Groundwater level/depth as supplied by the source. |
-| `country` | string | source code/name | Country value; output must be Pakistan only. |
+| `country` | string | source code/name | `PAK`, taken from the well ID prefix (the BGS workbook has no country column; its IDs start with PAK or IND). Output is Pakistan only. |
 | `latitude` | float/null | decimal degrees | Source latitude, if present. |
 | `longitude` | float/null | decimal degrees | Source longitude, if present. |
 

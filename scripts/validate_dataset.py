@@ -12,6 +12,8 @@ def main():
     if set(rows[0]) != required: raise SystemExit('FAIL: unexpected schema: %s' % list(rows[0]))
     non_pak=[r for r in rows if r['country'].strip().upper()!='PAK']
     if non_pak: raise SystemExit('FAIL: %d non-PAK rows present' % len(non_pak))
+    bad_ids=[r for r in rows if not r['site_id'].strip().upper().startswith('PAK')]
+    if bad_ids: raise SystemExit('FAIL: %d rows have a well ID that does not start with PAK' % len(bad_ids))
     invalid=[r for r in rows if not r['site_id'] or not r['date'] or not r['depth_m']]
     if invalid: raise SystemExit('FAIL: %d rows have missing core fields' % len(invalid))
     sites=Counter(r['site_id'] for r in rows)

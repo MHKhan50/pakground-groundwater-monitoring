@@ -8,7 +8,7 @@ PakGround is a research pipeline, not a claim that all groundwater in Punjab is 
 
 ## Why this project
 
-Groundwater is a critical resource for agriculture and communities in Pakistan. Long-term well observations can help describe where measured water levels have changed, while also exposing uneven observation coverage and data-quality limitations. The underlying BGS compilation spans 1884–2020 and includes 68,783 observations from 4,028 sites across the wider study region. It is a mixed Pakistan/India source; this project filters the country field before creating a Pakistan-only derivative.
+Groundwater is a critical resource for agriculture and communities in Pakistan. Long-term well observations can help describe where measured water levels have changed, while also exposing uneven observation coverage and data-quality limitations. The underlying BGS compilation spans 1884–2020 and includes 68,783 observations from 4,028 sites across the wider study region. It is a mixed Pakistan/India source; the workbook has no country column, so this project keeps wells whose BGS ID starts with `PAK` (IDs start with `PAK` or `IND`).
 
 ## Quick start (macOS / Python 3.9+)
 
@@ -54,9 +54,9 @@ The raw BGS workbook is downloaded locally and is not committed by default. The 
 ## Methodology
 
 1. Read the `Full_dataset` worksheet from the BGS Excel workbook.
-2. Identify site identifier, observation date, groundwater level, and country columns. Optional latitude/longitude fields are retained when present.
+2. Identify the site identifier (`OW_ID`), observation date (`DATE`), groundwater level (`WL_MBGL`) and coordinates (`LAT`, `LONG`); rows with a missing level (`NA`) are skipped. Optional latitude/longitude fields are retained when present.
 3. Normalize dates and numeric values; rows missing core fields are skipped.
-4. Filter country values to Pakistan only (`PAK`, `PK`, or `Pakistan`).
+4. Take the country from the well ID prefix (`PAK` or `IND`) and keep Pakistan only. If a future version of the source adds a country column, it is used instead.
 5. Export a stable CSV schema and validate that every exported row is Pakistan-tagged.
 6. For each site with at least four observations, fit ordinary least-squares depth-versus-calendar-year slope.
 

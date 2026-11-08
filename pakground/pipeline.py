@@ -12,7 +12,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 ALIASES = {
     "site_id": ("site_id", "site", "well_id", "well", "observation_well", "ow_id", "name", "id"),
     "date": ("date", "measurement_date", "observation_date", "time", "year"),
-    "depth_m": ("depth_m", "groundwater_level", "water_level", "level", "gw_level", "waterlevel", "mbgl"),
+    "depth_m": ("depth_m", "wl_mbgl", "groundwater_level", "water_level", "level", "gw_level", "waterlevel", "mbgl"),
     "country": ("country", "country_code", "nation"),
     "latitude": ("latitude", "lat", "y"),
     "longitude": ("longitude", "lon", "long", "x"),
@@ -64,10 +64,17 @@ def _find_columns(headers: Sequence[object], overrides: Optional[Dict[str, str]]
             if candidate in normalized:
                 found[field] = normalized[candidate]
                 break
-    missing = [field for field in ("site_id", "date", "depth_m", "country") if field not in found]
+    # The BGS workbook has no country column; its well IDs start with PAK or IND (see country_from_site_id).
+    missing = [field for field in ("site_id", "date", "depth_m") if field not in found]
     if missing:
         raise ValueError("Could not identify required columns: %s. Available headers: %s" % (", ".join(missing), list(headers)))
     return found
+
+
+def country_from_site_id(site_id: str) -> str:
+    """Return PAK or IND from a BGS well ID such as PAK2041 or IND17; empty string otherwise."""
+    prefix = "".join(ch for ch in str(site_id).strip().upper()[:3] if ch.isalpha())
+    return prefix if prefix in ("PAK", "IND") else ""
 
 
 def load_workbook_rows(path: Path, sheet_name: Optional[str] = None, overrides: Optional[Dict[str, str]] = None) -> List[dict]:
@@ -94,7 +101,8 @@ def load_workbook_rows(path: Path, sheet_name: Optional[str] = None, overrides: 
             if not row or all(value is None for value in row):
                 continue
             get = lambda key: row[columns[key]] if columns[key] < len(row) else None
-            country = str(get("country") or "").strip().upper()
+            country = (str(get("country") or "").strip().upper() if "country" in columns
+                       else country_from_site_id(get("site_id") or ""))
             parsed_date = _parse_date(get("date"))
             depth = _float(get("depth_m"))
             site = str(get("site_id") or "").strip()
