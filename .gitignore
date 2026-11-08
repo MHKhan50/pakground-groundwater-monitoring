@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+# Original source workbook is subject to its own terms and is downloaded locally.
+data/*.xlsx
+# Generated derivatives and results should be validated before committing/publishing.
+data/pakistan_groundwater_observations.csv
+results/*.csv

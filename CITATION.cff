@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the repository release and the original BGS dataset."
+title: "PakGround: Pakistan Groundwater Monitoring"
+authors:
+  - family-names: Hussain
+    given-names: Muzammal
+version: 0.1.0
+date-released: 2026-11-08
+license: MIT
+repository-code: "https://github.com/MHKhan50/pakground-groundwater-monitoring"
+keywords:
+  - groundwater
+  - Pakistan
+  - Punjab
+  - hydrogeology
+  - reproducible research
+references:
+  - type: dataset
+    authors:
+      - family-names: MacAllister
+        given-names: Donald John
+      - family-names: Krishan
+        given-names: Gopal
+      - family-names: Basharat
+        given-names: Muhammed
+      - family-names: MacDonald
+        given-names: Alan
+    title: "A century of groundwater accumulation in Pakistan and northwest India - dataset"
+    year: 2021
+    doi: "10.5285/150c95f7-18bf-4f66-880b-8364b7257b26"
